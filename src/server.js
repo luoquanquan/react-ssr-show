@@ -3,6 +3,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom';
 import App from './components/App.jsx';
 
 const app = new Koa();
@@ -27,9 +28,15 @@ const generateHtmlStr = reactDom => `
 `;
 
 router.get('*', (ctx) => {
+  const context = {};
+  const { url } = ctx.req;
   // 首先把 React 组件变成一个字符串
   // eslint-disable-next-line
-  const rNode = renderToString(<App />);
+  const rNode = renderToString(
+    <StaticRouter location={url} context={context}>
+      <App />
+    </StaticRouter>,
+  );
   // 然后替换 template 里边的内容
   const domString = generateHtmlStr(rNode);
 
