@@ -24,11 +24,11 @@ export default class App extends React.Component {
         <NavLink to="/Mapai">码牌</NavLink>
 
         <Switch>
-          <Route path="/" component={Home} />
-          <Route path="/Zhuapai" component={Zhuapai} />
-          <Route path="/Kanpai" component={Kanpai} />
-          <Route path="/Xipai" component={Xipai} />
-          <Route path="/Mapai" component={Mapai} />
+          <Route path="/" exact component={Home} />
+          <Route path="/Zhuapai" exact component={Zhuapai} />
+          <Route path="/Kanpai" exact component={Kanpai} />
+          <Route path="/Xipai" exact component={Xipai} />
+          <Route path="/Mapai" exact component={Mapai} />
         </Switch>
       </div>
     );
