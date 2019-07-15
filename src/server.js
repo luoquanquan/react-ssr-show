@@ -1,9 +1,10 @@
-// 因为是服务端渲染肯定要先引入 http
+import path from 'path';
 import Koa from 'koa';
 import Router from 'koa-router';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
+import serve from 'koa-static';
 import App from './components/App.jsx';
 
 const app = new Koa();
@@ -23,6 +24,7 @@ const generateHtmlStr = reactDom => `
 <body>
 
     <div id="app">${reactDom}</div>
+    <script src="/dist/bundle.js"></script>
 </body>
 </html>
 `;
@@ -44,6 +46,7 @@ router.get('*', (ctx) => {
   ctx.body = domString;
 });
 
+app.use(serve(path.resolve(__dirname, '../')));
 app.use(router.routes(), router.allowedMethods());
 
 app.listen(conf.PORT, () => {
