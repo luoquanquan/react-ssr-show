@@ -5,7 +5,9 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import serve from 'koa-static';
+import { Provider } from 'react-redux';
 import App from './components/App.jsx';
+import createStore, { init } from './store';
 
 const app = new Koa();
 const router = new Router();
@@ -32,12 +34,17 @@ const generateHtmlStr = reactDom => `
 router.get('*', (ctx) => {
   const context = {};
   const { url } = ctx.req;
+  const store = createStore();
+  // 初始化 store
+  store.dispatch(init());
   // 首先把 React 组件变成一个字符串
   // eslint-disable-next-line
   const rNode = renderToString(
-    <StaticRouter location={url} context={context}>
-      <App />
-    </StaticRouter>,
+    <Provider store={store}>
+      <StaticRouter location={url} context={context}>
+        <App />
+      </StaticRouter>
+    </Provider>,
   );
   // 然后替换 template 里边的内容
   const domString = generateHtmlStr(rNode);
