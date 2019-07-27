@@ -1,12 +1,8 @@
 import React from 'react';
-import { NavLink, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import router from '../router';
 
 import Header from './Header.jsx';
-import Home from './Home.jsx';
-import Zhuapai from './Zhuapai.jsx';
-import Kanpai from './Kanpai.jsx';
-import Xipai from './Xipai.jsx';
-import Mapai from './Mapai.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -19,11 +15,9 @@ export default class App extends React.Component {
       <div className="ssr-show">
         <Header />
         <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/Zhuapai" exact component={Zhuapai} />
-          <Route path="/Kanpai" exact component={Kanpai} />
-          <Route path="/Xipai" exact component={Xipai} />
-          <Route path="/Mapai" exact component={Mapai} />
+          {
+            router.map(route => <Route key={route.path} {...route} />)
+          }
         </Switch>
       </div>
     );
