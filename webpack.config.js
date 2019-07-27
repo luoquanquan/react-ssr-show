@@ -23,6 +23,7 @@ module.exports = {
       },
     ],
   },
+  devtool: 'sourcemap',
   plugins: [
     // 使用 html webpack plugin 创建 html 文件作为项目产出的依托文件
     new HtmlWebPackPlugin({
