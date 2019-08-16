@@ -2,9 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { logOut } from '../store';
 
-const mapStateToProps = state => ({
-  state,
-});
+const mapStateToProps = ({ sessionReducer }) => ({ sessionReducer });
 
 const mapDispatchToProps = dispatch => ({
   logOut: () => dispatch(logOut()),
@@ -13,6 +11,6 @@ const mapDispatchToProps = dispatch => ({
 export default connect(mapStateToProps, mapDispatchToProps)(props => (
   <>
     <h2>抓牌页面</h2>
-    <button type="button" onClick={() => props.logOut()}>退出</button>
+    { Boolean(props.sessionReducer) && <button type="button" onClick={() => props.logOut()}>退出</button> }
   </>
 ));
