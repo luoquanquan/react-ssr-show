@@ -36,6 +36,8 @@ class Kanpai extends React.Component {
   }
 }
 
+Kanpai.serverFetch = fetchData;
+
 const mapDispatchToProps = { fetchData };
 
 const mapStateToProps = ({ songReducer: songList }) => ({ songList });
