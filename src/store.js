@@ -1,4 +1,5 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 import getMockData from './mock';
 
 // actionTypes
@@ -54,4 +55,5 @@ const reducer = combineReducers({
 export default initState => createStore(
   reducer,
   initState,
+  applyMiddleware(thunkMiddleware),
 );
