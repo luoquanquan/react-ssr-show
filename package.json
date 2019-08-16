@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:client": "webpack --mode=production"
+    "build:client": "webpack --mode=development --watch"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@babel/register": "^7.4.4",
+    "axios": "^0.19.0",
     "koa": "^2.7.0",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
